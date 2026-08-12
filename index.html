@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Xoel - 18 Cumpleaños</title>
+
+    <!-- Metadatos para previsualización en WhatsApp -->
+    <meta property="og:title" content="Invitación Cumple 18 Xoel">
+    <meta property="og:description" content="Toca aquí para abrir tu invitación.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop">
+    <meta property="og:url" content="https://Cast0rM.github.io/xoel-18/">
+    <meta property="og:type" content="website">
+
+    <!-- Fuentes de Pinterest: Caligrafía elegante y Serif clásica -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --navy-bg: #0A1128;
+            --navy-card: #121E42;
+            --gold-light: #F9E596;
+            --gold-main: #D4AF37;
+            --gold-dark: #A67C00;
+            --text-main: #F4F7F6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--navy-bg);
+            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            /* Fondo sutil tipo acuarela oscura / polvo de oro */
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+        }
+
+        /* --- SOBRE VIRTUAL (PANTALLA INICIAL) --- */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--navy-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 1.2s ease-in-out, visibility 1.2s;
+        }
+
+        .seal-btn {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--gold-light), var(--gold-main));
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3), inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--navy-bg);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            animation: pulse-seal 2.5s infinite;
+        }
+
+        .seal-text {
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(244, 247, 246, 0.6);
+        }
+
+        @keyframes pulse-seal {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 20px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        /* --- INVITACIÓN PRINCIPAL (DISEÑO ARCO) --- */
+        #invitation-container {
+            display: none;
+            width: 90%;
+            max-width: 420px;
+            margin: 40px auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        #invitation-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .arch-card {
+            background-color: var(--navy-card);
+            border-radius: 120px 120px 20px 20px;
+            padding: 50px 30px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            /* Borde interior dorado (estilo foil) */
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .arch-card::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 110px 110px 15px 15px;
+            pointer-events: none;
+        }
+
+        /* --- TIPOGRAFÍA Y CONTENIDO --- */
+        .intro-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-main);
+            margin-bottom: 20px;
+        }
+
+        .name-calligraphy {
+            font-family: 'Alex Brush', cursive;
+            font-size: 5rem;
+            line-height: 1;
+            color: var(--gold-light);
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, #FFF, var(--gold-main));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .age-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: rgba(244, 247, 246, 0.8);
+            margin-bottom: 40px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background-color: var(--gold-main);
+            margin: 0 auto 30px;
+        }
+
+        .details-grid {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .gold-highlight {
+            color: var(--gold-main);
+            font-weight: 400;
+        }
+
+        /* --- MAPA ELEGANTE --- */
+        .map-section {
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 120px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 17, 40, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(2px);
+            transition: all 0.3s;
+        }
+
+        .map-overlay:active {
+            background: rgba(10, 17, 40, 0.2);
+            backdrop-filter: blur(0px);
+        }
+
+        .map-btn-elegant {
+            border: 1px solid var(--gold-main);
+            color: var(--gold-light);
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(10, 17, 40, 0.8);
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(80%) sepia(20%) hue-rotate(180deg) brightness(90%);
+            pointer-events: none;
+        }
+
+        /* --- SELECTOR DE IDIOMAS --- */
+        .lang-switch {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+        }
+
+        .lang-switch span {
+            color: rgba(244, 247, 246, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+            padding-bottom: 2px;
+        }
+
+        .lang-switch span.active {
+            color: var(--gold-main);
+            border-bottom: 1px solid var(--gold-main);
+        }
+
+        /* Control de idioma */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+            animation: softFade 1s ease;
+        }
+
+        @keyframes softFade {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PANTALLA INICIAL: EL "SELLO" -->
+    <div id="envelope-screen">
+        <button class="seal-btn" onclick="openInvitation()">X</button>
+        <div class="seal-text" id="seal-label">Tocar para abrir</div>
+    </div>
+
+    <!-- INVITACIÓN PRINCIPAL -->
+    <div id="invitation-container">
+        <div class="arch-card">
+
+            <!-- CONTENIDO ESPAÑOL -->
+            <div id="es-content" class="lang-content active">
+                <div class="intro-text">Estás invitado a celebrar</div>
+                <div class="name-calligraphy">Xoel</div>
+                <div class="age-number">Dieciocho Años</div>
+
+                <div class="divider"></div>
+
+                <div class="details-grid">
+                    Sábado, <span class="gold-highlight">29 de Agosto</span> de 2026<br>
+                    A las <span class="gold-highlight">18:00 horas</span>
+                    <br><br>
+                    Opfikonstrasse 25<br>
+                    8050 Zúrich
+                </div>
+            </div>
+
+            <!-- CONTENIDO ALEMÁN -->
+            <div id="de-content" class="lang-content">
+                <div class="intro-text">Du bist herzlich eingeladen</div>
+                <div class="name-calligraphy">Xoel</div>
+                <div class="age-number">Achtzehnter Geburtstag</div>
+
+                <div class="divider"></div>
+
+                <div class="details-grid">
+                    Samstag, <span class="gold-highlight">29. August</span> 2026<br>
+                    Um <span class="gold-highlight">18:00 Uhr</span>
+                    <br><br>
+                    Opfikonstrasse 25<br>
+                    8050 Zürich
+                </div>
+            </div>
+
+            <!-- MAPA -->
+            <div class="map-section"
+                onclick="window.open('https://maps.google.com/?q=Opfikonstrasse+25,+8050+Zürich', '_blank')">
+                <div class="map-overlay">
+                    <div class="map-btn-elegant" id="map-btn">Ver ubicación</div>
+                </div>
+                <iframe
+                    src="https://maps.google.com/maps?q=Opfikonstrasse%2025,%208050%20Z%C3%BCrich&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+            </div>
+
+            <!-- SELECTOR DE IDIOMAS -->
+            <div class="lang-switch">
+                <span id="btn-es" class="active" onclick="switchLang('es')">ESPAÑOL</span>
+                <span id="btn-de" onclick="switchLang('de')">DEUTSCH</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Animación de apertura suave
+        function openInvitation() {
+            const envelope = document.getElementById('envelope-screen');
+            const invitation = document.getElementById('invitation-container');
+
+            envelope.style.opacity = '0';
+
+            setTimeout(() => {
+                envelope.style.visibility = 'hidden';
+                invitation.style.display = 'block';
+
+                // Pequeño retardo para que el navegador aplique el display:block antes de animar
+                setTimeout(() => {
+                    invitation.classList.add('visible');
+                }, 50);
+            }, 1200); // Coincide con la transición de CSS
+        }
+
+        // Cambio de idiomas
+        function switchLang(lang) {
+            document.getElementById('es-content').classList.remove('active');
+            document.getElementById('de-content').classList.remove('active');
+            document.getElementById(lang + '-content').classList.add('active');
+
+            document.getElementById('btn-es').classList.remove('active');
+            document.getElementById('btn-de').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Traducir botón del mapa y texto inicial si se pulsa antes de abrir
+            const mapBtn = document.getElementById('map-btn');
+            const sealLabel = document.getElementById('seal-label');
+
+            if (lang === 'es') {
+                mapBtn.innerText = 'Ver ubicación';
+                sealLabel.innerText = 'Tocar para abrir';
+            } else {
+                mapBtn.innerText = 'Karte ansehen';
+                sealLabel.innerText = 'Tippen zum Öffnen';
+            }
+        }
+    </script>
+</body>
+
+</html>
